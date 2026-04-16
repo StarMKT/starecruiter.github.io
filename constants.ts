@@ -9,7 +9,15 @@ export const ROLE_DEFINITIONS: Record<Role, string> = {
   [Role.PLAN]: "Planejamento (Strategic Planner)",
   [Role.MID]: "Mídia (Media Buyer/Planner)",
   [Role.DIAG]: "Diagramador (Layout Artist)",
-  [Role.REV]: "Revisor (Proofreader)"
+  [Role.REV]: "Revisor (Proofreader)",
+  [Role.ESTRAT]: "Estrategista Sênior (Senior Strategist)",
+  [Role.CONTEUDO]: "Coordenador de Conteúdo (Content Lead)",
+  [Role.PERF_GROWTH]: "Performance & Growth (Growth Marketing / Analytics)",
+  [Role.DA_BRANDING]: "Diretor de Arte Branding (Brand Identity Art Director)",
+  [Role.DA_DIGITAL]: "Diretor de Arte Digital (Performance / Marketplace)",
+  [Role.MOTION]: "Motion Designer",
+  [Role.RED_DIGITAL]: "Redator Digital (Digital Copywriter)",
+  [Role.EXEC_CONTAS]: "Executivo de Contas (Account Executive / Key Account)"
 };
 
 export const HUB_DETAILS: Record<HubLocation, HubDetail> = {
@@ -61,5 +69,5 @@ export const LOADING_MESSAGES = [
   "Capturando pegada digital...",
   "Interpretando pegada digitral...",
   "Calculando fit cultural...",
-  "Compilando os 5 melhores perfis..."
+  "Compilando os melhores perfis..."
 ];

@@ -7,7 +7,15 @@ export enum Role {
   PLAN = "Planejamento",
   MID = "Mídia",
   DIAG = "Diagramador",
-  REV = "Revisor"
+  REV = "Revisor",
+  ESTRAT = "Estrategista Sênior",
+  CONTEUDO = "Coordenador de Conteúdo",
+  PERF_GROWTH = "Performance & Growth",
+  DA_BRANDING = "Diretor de Arte Branding",
+  DA_DIGITAL = "Diretor de Arte Digital",
+  MOTION = "Motion Designer",
+  RED_DIGITAL = "Redator Digital",
+  EXEC_CONTAS = "Executivo de Contas"
 }
 
 export enum Seniority {

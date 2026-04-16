@@ -182,19 +182,37 @@ function roleTerms(role: Role): string[] {
     case Role.HC:
       return ["Head of Creative", "Human Capital", "People", "RH", "Talent", "Recruitment"];
     case Role.DA:
-      return ["Diretor de Arte", "Art Director", "Direção de Arte", "Diretor(a) de Arte"];
+      return ["Diretor de Arte", "Art Director", "Direção de Arte", "Diretor(a) de Arte", "Creative Art Director"];
+    case Role.CC:
+      return ["Coordenador de Comunicação", "Communication Coordinator", "Brand Communication", "Corporate Communication"];
     case Role.RED:
       return ["Redator", "Copywriter", "Redação", "Conteúdo", "Content Writer"];
     case Role.ATE:
-      return ["Atendimento", "Account Manager", "Customer Success", "Relacionamento", "Key Account"];
+      return ["Atendimento", "Account Manager", "Relacionamento", "Client Service", "Account Management"];
     case Role.PLAN:
-      return ["Planejamento", "Strategic Planner", "Planner", "Estrategista"];
+      return ["Planejamento", "Strategic Planner", "Planner", "Estrategista", "Brand Strategist"];
     case Role.MID:
-      return ["Mídia", "Media Buyer", "Media Planner", "Tráfego", "Performance"];
+      return ["Mídia", "Media Buyer", "Media Planner", "Tráfego", "Paid Media"];
     case Role.DIAG:
-      return ["Diagramador", "Layout", "Layout Artist", "Designer Gráfico", "Design Gráfico"];
+      return ["Diagramador", "Diagramador de Ofertas", "Layout", "Layout Artist", "Designer Gráfico", "Design Gráfico"];
     case Role.REV:
       return ["Revisor", "Proofreader", "Revisão", "Copydesk"];
+    case Role.ESTRAT:
+      return ["Estrategista Sênior", "Senior Strategist", "Brand Strategist", "Strategic Planner", "Planejamento Estratégico"];
+    case Role.CONTEUDO:
+      return ["Coordenador de Conteúdo", "Content Coordinator", "Content Lead", "Content Manager", "Editorial Coordinator"];
+    case Role.PERF_GROWTH:
+      return ["Performance & Growth", "Growth Marketing", "Growth Analyst", "Performance Marketing", "Digital Performance", "Analytics"];
+    case Role.DA_BRANDING:
+      return ["Diretor de Arte Branding", "Branding Art Director", "Brand Designer", "Identidade Visual", "Brand Identity"];
+    case Role.DA_DIGITAL:
+      return ["Diretor de Arte Digital", "Digital Art Director", "Performance Creative", "Marketplace Designer", "Creative for Performance"];
+    case Role.MOTION:
+      return ["Motion Designer", "Designer de Motion", "Motion Graphics", "After Effects", "Video Designer"];
+    case Role.RED_DIGITAL:
+      return ["Redator Digital", "Digital Copywriter", "Copywriter", "Content Writer", "Social Media Copywriter"];
+    case Role.EXEC_CONTAS:
+      return ["Executivo de Contas", "Account Executive", "Key Account", "Farmer", "Hunter", "Venda Consultiva", "Consultive Sales"];
     default:
       // fallback: usa definição
       return [ROLE_DEFINITIONS[role] || String(role)];
