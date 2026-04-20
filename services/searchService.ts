@@ -188,7 +188,20 @@ function roleTerms(role: Role): string[] {
     case Role.RED:
       return ["Redator", "Copywriter", "Redação", "Conteúdo", "Content Writer"];
     case Role.ATE:
-      return ["Atendimento", "Account Manager", "Relacionamento", "Client Service", "Account Management"];
+      return [
+        "Atendimento Publicitário",
+        "Atendimento Publicitario",
+        "Atendimento de Agência",
+        "Atendimento em Agência de Publicidade",
+        "Executivo de Atendimento",
+        "Executivo de Atendimento Publicitário",
+        "Executivo de Atendimento Publicitario",
+        "Atendimento Sr.",
+        "Atendimento Sênior",
+        "Atendimento Senior",
+        "Client Services",
+        "Publicidade"
+      ];
     case Role.PLAN:
       return ["Planejamento", "Strategic Planner", "Planner", "Estrategista", "Brand Strategist"];
     case Role.MID:
@@ -219,6 +232,45 @@ function roleTerms(role: Role): string[] {
   }
 }
 
+function roleContextTerms(role: Role): string[] {
+  switch (role) {
+    case Role.ATE:
+      return [
+        "Agência de Publicidade",
+        "Agencia de Publicidade",
+        "Agência",
+        "Agencia",
+        "Publicidade",
+        "Propaganda",
+        "Advertising Agency"
+      ];
+    default:
+      return [];
+  }
+}
+
+function roleNegativeTerms(role: Role): string[] {
+  switch (role) {
+    case Role.ATE:
+      return [
+        "Key Account",
+        "Key Account Manager",
+        "Customer Experience",
+        "Customer Success",
+        "CX",
+        "CS",
+        "IT",
+        "Tech",
+        "Tecnologia",
+        "Software",
+        "SaaS",
+        "Product Manager"
+      ];
+    default:
+      return [];
+  }
+}
+
 function seniorityTerms(s: string): string[] {
   const clean = String(s);
   if (clean.toLowerCase().includes("jún")) return ["Júnior", "Junior", "Jr"];
@@ -231,6 +283,7 @@ export function buildGoogleQuery(formData: FormData, hub: HubDetail): string {
   const roleKey = formData.role as unknown as Role;
   const roleLabel = ROLE_DEFINITIONS[roleKey] || String(formData.role || "");
   const roleHints = roleTerms(roleKey);
+  const contextHints = roleContextTerms(roleKey);
   // inclui a definição por segurança (ex.: "Diagramador (Layout Artist)")
   if (roleLabel && !roleHints.includes(roleLabel)) roleHints.unshift(roleLabel);
 
@@ -240,11 +293,21 @@ export function buildGoogleQuery(formData: FormData, hub: HubDetail): string {
   const rolePart = qOr(roleHints);
   const seniorityPart = qOr(seniorityHints);
   const locPart = qOr(locHints);
+  const contextPart = contextHints.length > 0 ? ` ${qOr(contextHints)}` : "";
 
   // bloqueios básicos para reduzir vagas/anúncios
-  const negatives = "-jobs -vagas -vaga -recrutamento -hiring -careers -job";
+  const genericNegatives = ["jobs", "vagas", "vaga", "recrutamento", "hiring", "careers", "job"];
+  const roleNegatives = roleNegativeTerms(roleKey);
+  const negatives = [...genericNegatives, ...roleNegatives]
+    .map((term) => {
+      const normalized = term.trim();
+      if (!normalized) return "";
+      return /\s/.test(normalized) ? `-"${normalized}"` : `-${normalized}`;
+    })
+    .filter(Boolean)
+    .join(" ");
 
-  return `site:linkedin.com/in ${rolePart} ${seniorityPart} ${locPart} ${negatives}`;
+  return `site:linkedin.com/in ${rolePart} ${seniorityPart} ${locPart}${contextPart} ${negatives}`;
 }
 
 export function buildGoogleUrl(query: string): string {
